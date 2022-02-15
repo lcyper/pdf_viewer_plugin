@@ -18,12 +18,16 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final sampleUrl = 'http://www.africau.edu/images/default/sample.pdf';
+  // final sampleUrl = 'http://www.africau.edu/images/default/sample.pdf';
+  final sampleUrl =
+      'https://www.uv.mx/personal/clelanda/files/2013/03/Aprender-a-buscar-en-Google.pdf';
+  // https://www.adobe.com/content/dam/acom/en/devnet/pdf/pdfs/pdf_reference_archives/PDFReference.pdf
 
   String? pdfFilePath;
 
   Future<String> downloadAndSavePdf() async {
-    final directory = await getApplicationDocumentsDirectory();
+    // final directory = await getApplicationDocumentsDirectory();
+    final directory = await getTemporaryDirectory();
     final file = File('${directory.path}/sample.pdf');
     if (await file.exists()) {
       return file.path;
@@ -33,22 +37,26 @@ class _MyAppState extends State<MyApp> {
     return file.path;
   }
 
-  Future<String?> loadPdfFromAssets() async {
+  Future<String> loadPdfFromAssets() async {
     final directory = await getTemporaryDirectory();
     final file = File('${directory.path}/bereshit.pdf');
+    if (await file.exists()) {
+      return file.path;
+    }
     final byteData = await rootBundle.load('assets/bereshit.pdf');
 
     await file.writeAsBytes(byteData.buffer
         .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
 
-    // if (await file.exists()) {
     return file.path;
-    // }
   }
 
-  void loadPdf(BuildContext context) async {
+  void loadPdf(
+    BuildContext context,
+    Future<String> Function() function,
+  ) async {
     // pdfFlePath = await downloadAndSavePdf();
-    pdfFilePath = await loadPdfFromAssets();
+    pdfFilePath = await function();
     if (pdfFilePath != null) {
       Navigator.push(
         context,
@@ -62,6 +70,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      themeMode: ThemeMode.light,
       home: Builder(builder: (context) {
         return Scaffold(
           backgroundColor: Colors.grey,
@@ -69,9 +78,18 @@ class _MyAppState extends State<MyApp> {
             title: Text('Plugin example app'),
           ),
           body: Center(
-            child: ElevatedButton(
-              child: Text("Load pdf"),
-              onPressed: ()=>loadPdf(context),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  child: Text("Load pdf from assets"),
+                  onPressed: () => loadPdf(context, loadPdfFromAssets),
+                ),
+                ElevatedButton(
+                  child: Text("Load pdf from internet"),
+                  onPressed: () => loadPdf(context, downloadAndSavePdf),
+                ),
+              ],
             ),
           ),
         );
