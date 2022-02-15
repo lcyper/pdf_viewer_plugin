@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0-alpha02'
+        classpath 'com.android.tools.build:gradle:7.3.0-alpha03'
         // classpath 'com.android.tools.build:gradle:4.1.0'
     }
 }
@@ -35,8 +35,11 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation('com.github.barteksc:android-pdf-viewer:3.0.0-beta.4') {
-        force = true
-    }
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation('com.github.barteksc:android-pdf-viewer:3.2.0-beta.1')
+    // implementation('com.github.barteksc:android-pdf-viewer:3.0.0-beta.4') {
+    //    force = true
+    //}
+    // descomment next line only in development (write code, to hide errors from io.flutter imports)
+    //implementation files('C://flutter/bin/cache/artifacts/engine/android-x64/flutter.jar')
 }
