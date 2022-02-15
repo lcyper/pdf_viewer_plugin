@@ -24,10 +24,10 @@ class MethodChannelPdfViewerPlatform {
   ///
   /// This is used for the `creationParams` argument of the platform views created by
   /// [AndroidPdfViewerBuilder] and [CupertinoPdfViewerBuilder].
-  static Map<String, dynamic> creationParamsToMap(
-      CreationParams creationParams) {
-    return <String, dynamic>{
-      'filePath': creationParams.path,
-    };
-  }
+  // static Map<String, dynamic> creationParamsToMap(
+  //     CreationParams creationParams) {
+  //   return <String, dynamic>{
+  //     'filePath': creationParams.filePath,
+  //   };
+  // }
 }

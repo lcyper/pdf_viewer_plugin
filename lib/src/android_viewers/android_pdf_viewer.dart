@@ -18,7 +18,7 @@ class AndroidPdfViewer implements PdfViewerPlatform {
   @override
   Widget build({
     BuildContext? context,
-    CreationParams? creationParams,
+    CreationParams? parameters,
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   }) {
     return GestureDetector(
@@ -29,8 +29,8 @@ class AndroidPdfViewer implements PdfViewerPlatform {
         onPlatformViewCreated: (int id) {},
         gestureRecognizers: gestureRecognizers,
         layoutDirection: TextDirection.rtl,
-        creationParams:
-            MethodChannelPdfViewerPlatform.creationParamsToMap(creationParams!),
+        creationParams: parameters!.toMap(),
+            // MethodChannelPdfViewerPlatform.creationParamsToMap(parameters!),
         creationParamsCodec: const StandardMessageCodec(),
       ),
     );

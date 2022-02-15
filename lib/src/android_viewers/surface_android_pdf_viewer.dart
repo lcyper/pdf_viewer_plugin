@@ -12,7 +12,7 @@ class SurfaceAndroidPdfViewer extends AndroidPdfViewer {
   @override
   Widget build({
     BuildContext? context,
-    CreationParams? creationParams,
+    CreationParams? parameters,
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   }) {
     return PlatformViewLink(
@@ -33,8 +33,8 @@ class SurfaceAndroidPdfViewer extends AndroidPdfViewer {
           id: params.id,
           viewType: 'pdf_viewer_plugin',
           layoutDirection: TextDirection.rtl,
-          creationParams: MethodChannelPdfViewerPlatform.creationParamsToMap(
-              creationParams!),
+          creationParams: parameters!.toMap(),
+          // MethodChannelPdfViewerPlatform.creationParamsToMap(parameters!),
           creationParamsCodec: const StandardMessageCodec(),
         )
           ..addOnPlatformViewCreatedListener(params.onPlatformViewCreated)

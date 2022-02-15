@@ -10,15 +10,15 @@ class CupertinoPdfViewer implements PdfViewerPlatform {
   @override
   Widget build({
     BuildContext? context,
-    CreationParams? creationParams,
+    CreationParams? parameters,
     Set<Factory<OneSequenceGestureRecognizer>>? gestureRecognizers,
   }) {
     return UiKitView(
       viewType: 'pdf_viewer_plugin',
       onPlatformViewCreated: (int id) {},
       gestureRecognizers: gestureRecognizers,
-      creationParams:
-          MethodChannelPdfViewerPlatform.creationParamsToMap(creationParams!),
+      creationParams: parameters!.toMap(),
+          // MethodChannelPdfViewerPlatform.creationParamsToMap(parameters!),
       creationParamsCodec: const StandardMessageCodec(),
     );
   }
