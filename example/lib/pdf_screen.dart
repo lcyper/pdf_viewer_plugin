@@ -10,12 +10,36 @@ class PdfScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget _floatingActionButton() => Column(
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.add),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.remove),
+            ),
+          ],
+        );
+
     return Scaffold(
+      floatingActionButton: _floatingActionButton(),
       backgroundColor: Colors.red,
       appBar: AppBar(
         title: Text('Pdf Reader Plugin'),
       ),
-      body: PdfView(path: pdfFilePath),
+      body: Container(
+        color: Colors.blue,
+        child: PdfView(
+          filePath: pdfFilePath,
+          spacing: 10,
+          initialPage: 3,
+        ),
+      ),
     );
   }
 }
